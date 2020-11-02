@@ -29,18 +29,18 @@ pipeline {
     stage('Checkout code') {
             steps {
                  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CheckoutOption', timeout: 60]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '6450a696-f924-4a1a-b70f-9e69524dcb53', url: 'https://github.com/jojivarghese25/Cucumber-automation.git']]])
-              sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test'
+              
             }
         }
 
-   // stage('FunctionalTesting') {
-   //   steps {
-    //    withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
-      //    sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
-      //  }
+    stage('FunctionalTesting') {
+     steps {
+       withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+          sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
+       }
 
-    //  }
-   // }
+     }
+    }
 
 
 
