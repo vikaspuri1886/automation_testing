@@ -54,7 +54,7 @@ pipeline {
 
     stage('Email') {
       steps {
-       emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'), from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
+       emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!') from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
       }
     }
 
