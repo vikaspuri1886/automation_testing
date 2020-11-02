@@ -18,6 +18,7 @@ pipeline {
 
       }
     }
+   
     stage('Clone another repository') {
       steps {
         git branch: 'master',
@@ -27,17 +28,18 @@ pipeline {
     stage('Checkout code') {
             steps {
                 checkout scm
+              sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
             }
         }
 
-    stage('FunctionalTesting') {
-      steps {
-        withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
-          sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
-        }
+   // stage('FunctionalTesting') {
+   //   steps {
+    //    withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+      //    sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
+      //  }
 
-      }
-    }
+    //  }
+   // }
 
 
 
