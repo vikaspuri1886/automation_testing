@@ -50,15 +50,15 @@ pipeline {
      // }
   //  }
 
- // }
+  }
   tools {
     maven 'Maven'
   }
-  post {
-    failure {
-      emailext(subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find attached logs.', attachLog: true, from: "jojisham13@gmail.com", to: "jojihr@gmail.com")
-    }
+  //post {
+  //  failure {
+   //   emailext(subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find attached logs.', attachLog: true, from: "jojisham13@gmail.com", to: "jojihr@gmail.com")
+   // }
 
-  }
+ // }
 }
-}
+
