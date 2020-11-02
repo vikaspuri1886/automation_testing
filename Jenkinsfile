@@ -29,7 +29,7 @@ pipeline {
     stage('Checkout code') {
             steps {
                  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CheckoutOption', timeout: 60]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '6450a696-f924-4a1a-b70f-9e69524dcb53', url: 'https://github.com/jojivarghese25/Cucumber-automation.git']]])
-              sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
+              sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test'
             }
         }
 
