@@ -19,16 +19,16 @@ pipeline {
       }
     }
    
-    stage('Clone another repository') {
-      steps {
-        git branch: 'master',
-        credentialsId: '87af46ec-e10a-46f3-accd-60bfacb10526',
-        url: 'https://github.com/jojivarghese25/Cucumber-automation.git'
-      }
-    }
+    //stage('Clone another repository') {
+    //  steps {
+     //   git branch: 'master',
+     //   credentialsId: '87af46ec-e10a-46f3-accd-60bfacb10526',
+     //   url: 'https://github.com/jojivarghese25/Cucumber-automation.git'
+     // }
+   // }
     stage('Checkout code') {
             steps {
-                checkout scm
+                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CheckoutOption', timeout: 60]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '6450a696-f924-4a1a-b70f-9e69524dcb53', url: 'https://github.com/jojivarghese25/Cucumber-automation.git']]])
               sh 'mvn -f Cucumber-automation/cucumber-API-Framework/pom.xml test -Dtestfile=cucumber-API-Framework.java'
             }
         }
@@ -44,13 +44,13 @@ pipeline {
 
 
 
-    stage('Email') {
-      steps {
-        emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("apiops-anypoint-bdd-sapi/emailTemplate.html"), attachmentsPattern: 'apiops-anypoint-bdd-sapi/target/cucumber-reports/report.html', from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
-      }
-    }
+    //stage('Email') {
+     // steps {
+     //   emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("apiops-anypoint-bdd-sapi/emailTemplate.html"), attachmentsPattern: 'apiops-anypoint-bdd-sapi/target/cucumber-reports/report.html', from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
+     // }
+  //  }
 
-  }
+ // }
   tools {
     maven 'Maven'
   }
