@@ -42,13 +42,21 @@ pipeline {
      }
     }
 
+    stage('Cucumber Reports') {
+            steps {
+                 cucumber buildStatus: "UNSTABLE",
+                   fileIncludePattern: "**/cucumber.json",
+                   jsonReportDirectory: 'target'
+              
+            }
+        }
 
 
-    //stage('Email') {
-     // steps {
-     //   emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("apiops-anypoint-bdd-sapi/emailTemplate.html"), attachmentsPattern: 'apiops-anypoint-bdd-sapi/target/cucumber-reports/report.html', from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
-     // }
-  //  }
+    stage('Email') {
+      steps {
+       emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("apiops-anypoint-bdd-sapi/emailTemplate.html"), attachmentsPattern: 'apiops-anypoint-bdd-sapi/target/cucumber-reports/report.html', from: "jojisham13@gmail.com", mimeType: "text/html", to: "jojihr@gmail.com")
+      }
+    }
 
   }
   tools {
