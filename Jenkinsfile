@@ -22,6 +22,7 @@ pipeline {
     stage('Clone another repository') {
       steps {
         git branch: 'master',
+         git credentialsId: '87af46ec-e10a-46f3-accd-60bfacb10526',
         url: 'https://github.com/jojivarghese25/Cucumber-automation.git'
       }
     }
