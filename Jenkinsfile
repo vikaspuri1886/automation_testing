@@ -45,7 +45,7 @@ pipeline {
     stage('Cucumber Reports') {
             steps {
                  cucumber buildStatus: "UNSTABLE",
-                   fileIncludePattern: "cucumber-API-Framework/target/cucumber-reports/report.html",
+                   fileIncludePattern: "target/cucumber-reports/report.html",
                    jsonReportDirectory: 'target'
               
             }
@@ -54,7 +54,7 @@ pipeline {
 
     stage('Email') {
       steps {
-       emailext (attachLog: true, body: 'Please find attached report', mimeType: 'text/html', replyTo: 'jojisham13@gmail.com', subject: 'Cucumber reports', to: 'jojihr@gmail.com')
+        emailext attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', body: 'please find attached report', replyTo: 'jojihr@gmail.com', subject: 'Reports', to: 'jojihr@gmail.com'
       }
     }
 
