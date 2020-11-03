@@ -36,8 +36,8 @@ pipeline {
     stage('FunctionalTesting') {
      steps {
        withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
-          sh 'mvn -f cucumber-API-Framework/pom.xml test' -Dcucumber.options=\"src/test/java/features/ --tags ~@Ignore\""}
-       }
+          sh 'mvn -f cucumber-API-Framework/pom.xml test' -Dcucumber.options="src/test/java/features/ --tags ~@Ignore"}
+       
       finally {
                            cucumber buildStatus: "UNSTABLE", 
                            fileIncludePattern: "**/cucumber.json",
