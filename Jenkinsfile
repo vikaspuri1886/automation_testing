@@ -40,17 +40,18 @@ pipeline {
        
      
      }
-      steps {
+      
+    }
+
+   stage('Cucumber Reports') {
+    steps {
                  cucumber buildStatus: "UNSTABLE",
                    fileIncludePattern: "**/cucumber.json",
                    jsonReportDirectory: 'target'
               
             }
-    }
-
-  // stage('Cucumber Reports') {
            
-       // }
+        }
 
 
     stage('Email') {
