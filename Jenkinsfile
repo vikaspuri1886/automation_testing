@@ -54,7 +54,7 @@ pipeline {
 
     stage('Email') {
       steps {
-        emailext attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', body: 'please find attached report', replyTo: 'jojihr@gmail.com', subject: 'Reports', to: 'jojihr@gmail.com'
+        emailext attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', body: 'please find attached report', replyTo: 'jojisham13@gmail.com', subject: 'Reports', to: 'jojisham13@gmail.com'
       }
     }
 
@@ -64,7 +64,7 @@ pipeline {
   }
   //post {
   //  failure {
-   //   emailext(subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find attached logs.', attachLog: true, from: "jojisham13@gmail.com", to: "jojihr@gmail.com")
+   //   emailext(subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find attached logs.', attachLog: true, from: "jojisham13@gmail.com", to: "jojisham13@gmail.com")
    // }
 
  // }
