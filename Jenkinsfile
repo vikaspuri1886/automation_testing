@@ -10,14 +10,14 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
-      steps {
-        withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
-          sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
-        }
+   // stage('Deploy') {
+    //  steps {
+    //    withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+     //     sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
+     //   }
 
-      }
-    }
+     // }
+    //}
    
     //stage('Clone another repository') {
     //  steps {
@@ -46,10 +46,7 @@ pipeline {
 
   stage('Cucumber Reports') {
     steps {
-              cucumber buildStatus: "UNSTABLE",
-                  fileIncludePattern: "**/cucumber.json",
-                jsonReportDirectory: 'target'
-              
+              cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: '**/*.json', jsonReportDirectory: 'cucumber-API-Framework/target/', pendingStepsNumber: -1, reportTitle: 'Reports', skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
            }
            
         }
