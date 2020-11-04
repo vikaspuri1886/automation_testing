@@ -61,3 +61,4 @@ pipeline {
     maven 'Maven'
   }
 
+}
