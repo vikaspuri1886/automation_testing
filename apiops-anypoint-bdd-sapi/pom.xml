@@ -73,7 +73,7 @@
 				</configuration>
 			</plugin>
 			
-	<!-- TODO: Uncomment after nexus setup in remote Jenkins	
+		
         <plugin>
                 <groupId>com.mulesoft.munit.tools</groupId>
                 <artifactId>munit-maven-plugin</artifactId>
@@ -97,7 +97,7 @@
                     </coverage>
                 </configuration>
             </plugin>
-          -->
+          
         </plugins>
 	</build>
 
@@ -231,7 +231,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
-    	<!-- TODO: Uncomment after nexus setup in remote Jenkins
+    	
     	<dependency>
             <groupId>com.mulesoft.munit</groupId>
             <artifactId>munit-runner</artifactId>
@@ -245,7 +245,7 @@
             <classifier>mule-plugin</classifier>
             <scope>test</scope>
         </dependency>
-        -->
+        
     </dependencies>
 
 	<repositories>
