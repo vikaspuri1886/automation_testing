@@ -94,7 +94,7 @@
                         <formats>
                             <format>html</format>
                         </formats>
-                        <failBuild>true</failBuild> <requiredApplicationCoverage>17</requiredApplicationCoverage> <requiredResourceCoverage>20</requiredResourceCoverage> <requiredFlowCoverage>20</requiredFlowCoverage>
+                        <failBuild>true</failBuild> <requiredApplicationCoverage>17</requiredApplicationCoverage> <requiredResourceCoverage>0</requiredResourceCoverage> <requiredFlowCoverage>0</requiredFlowCoverage>
                     </coverage>
                 </configuration>
             </plugin>
