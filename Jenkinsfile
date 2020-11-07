@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+  /*  stage('Build') {
       steps {
         withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
           sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml clean install -Dtestfile=runner.TestRunner.java -DskipTests '
         }
 
       }
-    }
+    }*/
 
     // Need to uncomment and check in remote Jenkins once nexus is installed and working there
     //stage('upload to nexus') {
@@ -61,7 +61,7 @@ pipeline {
                     }
                 }
             }*/
-     stage('Build image') {
+     /*stage('Build image') {
       steps {
         script {
           dockerImage= docker.build("njc/apiops-anypoint-bdd-sapi")
@@ -79,7 +79,7 @@ pipeline {
 
         echo 'container running'
       }
-    }
+    }*/
 
 
 
