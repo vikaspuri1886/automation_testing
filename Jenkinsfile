@@ -9,11 +9,25 @@ pipeline {
 
       }
     }
+<<<<<<< HEAD
     // Need to uncomment and check in remote Jenkins once nexus is installed and working there
     //stage('upload to nexus') {
       //steps {
         //script {
           //pom = readMavenPom file: "apiops-anypoint-bdd-sapi/pom.xml";
+=======
+    /*stage('Munit') {
+      steps {
+        sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml test'
+      }
+    }*/
+
+   //stage('Deploy') {
+     // steps {
+     //  withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+      //    sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
+     //  }
+>>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
 
           //filesbyGlob = findFiles(glob: "target/*.jar");
 
@@ -28,9 +42,46 @@ pipeline {
         withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
           sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
         }
+<<<<<<< HEAD
 
       }
     }
+=======
+        stage('Quality Gate'){
+            steps {
+                script {
+                    timeout(time: 1, unit: 'HOURS') { 
+                        sh "curl -u admin:admin -X GET -H 'Accept: application/json' http://localhost:9000/api/qualitygates/project_status?projectKey=com.mycompany:sonarqube-poc > status.json"
+                        def json = readJSON file:'status.json'
+                        echo "${json.projectStatus}"
+                        if ("${json.projectStatus.status}" != "OK") {
+                            currentBuild.result = 'FAILURE'
+                            error('Pipeline aborted due to quality gate failure.')
+                        }
+                    }
+                }
+            }
+     stage('Build image') {
+      steps {
+        script {
+          dockerImage= docker.build("ravisunny27/apiops-anypoint-bdd-sapi")
+        }
+
+        echo 'image built'
+      }
+    }
+
+    stage('Run container') {
+      steps {
+        script {
+          bat 'docker run -itd -p 8081:8081 --name apiops-anypoint-bdd-sapi  ravisunny27/apiops-anypoint-bdd-sapi'
+        }
+
+        echo 'container running'
+      }
+    }*/
+
+>>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
 
     stage('FunctionalTesting') {
       steps {
@@ -62,8 +113,22 @@ pipeline {
         emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("cucumber-API-Framework/src/main/resources/emailTemplate.html"), attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', from: "${readProps['email.from']}", mimeType: "${readProps['email.mimeType']}", to: "${readProps['email.to']}")
       }
     }
-
   }
+ /*stage('Kill container') {
+      steps {
+        script {
+          bat 'docker rm -f apiops-anypoint-bdd-sapi'
+        }
+
+<<<<<<< HEAD
+=======
+        echo 'container Killed'
+      }
+    }
+
+>>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
+  }
+  }*/
   tools {
     maven 'Maven'
   }
