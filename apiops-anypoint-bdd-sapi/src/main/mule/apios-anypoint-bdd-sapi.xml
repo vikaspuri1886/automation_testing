@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
     <http:listener-config name="apios-anypoint-bdd-sapi-httpListenerConfig">
-        <http:listener-connection host="0.0.0.0" port="8081" />
+        <http:listener-connection host="0.0.0.0" port="${http.port}" />
     </http:listener-config>
-    <apikit:config name="apios-anypoint-bdd-sapi-config" api="apios-anypoint-bdd-sapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="apios-anypoint-bdd-sapi-config" api="resource::b3518803-262d-42ed-8a30-63afd2e3c95f:apios-anypoint-bdd-sapi:1.0.0:raml:zip:apios-anypoint-bdd-sapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="apios-anypoint-bdd-sapi-main">
         <http:listener config-ref="apios-anypoint-bdd-sapi-httpListenerConfig" path="/api/*">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -124,12 +124,9 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\users\registerUser\subscription:apios-anypoint-bdd-sapi-config">
-        <flow-ref doc:name="Flow Reference" doc:id="5e665455-d301-4eee-b4e0-697730c40c78" name="user-subscription-flow" />
+		<flow-ref doc:name="Flow Reference" doc:id="739c1e8c-3f6f-4385-b60c-bb67ae4fb078" name="user-subscription-flow"/>
     </flow>
     <flow name="post:\users\registerUser:application\json:apios-anypoint-bdd-sapi-config">
-        <flow-ref doc:name="Flow Reference" doc:id="31c20554-d4aa-4db4-9b49-90afadf4940d" name="customer-register-flow" />
-    </flow>
-    <flow name="get:\synchronizeUsers:apios-anypoint-bdd-sapi-config">
-        <flow-ref doc:name="Flow Reference" doc:id="6571dc11-5a94-4701-bb8f-05bc4f7a07af" name="synchronize-users-implementation-Flow"/>
+        <flow-ref doc:name="Flow Reference" doc:id="31c20554-d4aa-4db4-9b49-90afadf4940d" name="customer-register-flow"/>
     </flow>
 </mule>
