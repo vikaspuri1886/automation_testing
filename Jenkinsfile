@@ -9,15 +9,20 @@ pipeline {
 
       }
     }
+    stage('Munit') {
+      steps {
+        sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml test'
+      }
+    }
 
    //stage('Deploy') {
-    //  steps {
-    //    withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
-     //     sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
-     //   }
+     // steps {
+     //  withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+      //    sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
+     //  }
 
 
-     // }
+    //  }
    // }
 
 
@@ -27,6 +32,29 @@ pipeline {
 
            // }
         //}
+    
+   /* stage('SonarQube'){
+            steps {
+                withSonarQubeEnv('Sonarqube') {
+                   sh "mvn -f sonarqube-poc/pom.xml sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.sources=src/"
+           
+                }
+            }
+        }
+        stage('Quality Gate'){
+            steps {
+                script {
+                    timeout(time: 1, unit: 'HOURS') { 
+                        sh "curl -u admin:admin -X GET -H 'Accept: application/json' http://localhost:9000/api/qualitygates/project_status?projectKey=com.mycompany:sonarqube-poc > status.json"
+                        def json = readJSON file:'status.json'
+                        echo "${json.projectStatus}"
+                        if ("${json.projectStatus.status}" != "OK") {
+                            currentBuild.result = 'FAILURE'
+                            error('Pipeline aborted due to quality gate failure.')
+                        }
+                    }
+                }
+            }*/
 
     stage('FunctionalTesting') {
      steps {
@@ -40,6 +68,7 @@ pipeline {
        
        }
 
+     
 
   stage('Reports') {
       steps {

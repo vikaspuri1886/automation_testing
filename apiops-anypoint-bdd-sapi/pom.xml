@@ -72,6 +72,10 @@
                         <formats>
                             <format>html</format>
                         </formats>
+<<<<<<< HEAD
+=======
+                        <failBuild>true</failBuild> <requiredApplicationCoverage>17</requiredApplicationCoverage> <requiredResourceCoverage>0</requiredResourceCoverage> <requiredFlowCoverage>0</requiredFlowCoverage>
+>>>>>>> 415e5e521e85be881fe3e60ea80418eed5a088fa
                     </coverage>
                 </configuration>
             </plugin>
