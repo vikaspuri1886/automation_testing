@@ -9,11 +9,11 @@ pipeline {
 
       }
     }
-    stage('Munit') {
+    /*stage('Munit') {
       steps {
         sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml test'
       }
-    }
+    }*/
 
    //stage('Deploy') {
      // steps {
@@ -54,7 +54,27 @@ pipeline {
                         }
                     }
                 }
-            }*/
+            }
+     stage('Build image') {
+      steps {
+        script {
+          dockerImage= docker.build("ravisunny27/apiops-anypoint-bdd-sapi")
+        }
+
+        echo 'image built'
+      }
+    }
+
+    stage('Run container') {
+      steps {
+        script {
+          bat 'docker run -itd -p 8081:8081 --name apiops-anypoint-bdd-sapi  ravisunny27/apiops-anypoint-bdd-sapi'
+        }
+
+        echo 'container running'
+      }
+    }*/
+
 
     stage('FunctionalTesting') {
      steps {
@@ -84,8 +104,18 @@ pipeline {
       }
     }
 
+ /*stage('Kill container') {
+      steps {
+        script {
+          bat 'docker rm -f apiops-anypoint-bdd-sapi'
+        }
+
+        echo 'container Killed'
+      }
+    }
 
   }
+  }*/
   tools {
     maven 'Maven'
   }
