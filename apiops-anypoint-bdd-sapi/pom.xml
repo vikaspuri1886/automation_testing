@@ -117,18 +117,8 @@
                         <formats>
                             <format>html</format>
                         </formats>
-<<<<<<< HEAD
-                        <failBuild>true</failBuild>
-<!-- Need to change parameters according to 80% coverage -->
-    					<requiredApplicationCoverage>17</requiredApplicationCoverage> 
-    					<requiredResourceCoverage>0</requiredResourceCoverage>
-   	 					<requiredFlowCoverage>0</requiredFlowCoverage>
-=======
 
 
-                       
- 
->>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
                     </coverage>
                 </configuration>
             </plugin>
