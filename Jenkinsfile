@@ -9,13 +9,13 @@ pipeline {
 
       }
     }
-<<<<<<< HEAD
+
     // Need to uncomment and check in remote Jenkins once nexus is installed and working there
     //stage('upload to nexus') {
       //steps {
         //script {
           //pom = readMavenPom file: "apiops-anypoint-bdd-sapi/pom.xml";
-=======
+
     /*stage('Munit') {
       steps {
         sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml test'
@@ -27,7 +27,7 @@ pipeline {
      //  withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
       //    sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
      //  }
->>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
+
 
           //filesbyGlob = findFiles(glob: "target/*.jar");
 
@@ -37,16 +37,16 @@ pipeline {
       //}
     //}
 
-    stage('Deploy') {
+   /* stage('Deploy') {
       steps {
         withEnv(overrides: ["JAVA_HOME=${ tool 'JDK 8' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
           sh 'mvn -f apiops-anypoint-bdd-sapi/pom.xml package deploy -DmuleDeploy -Dtestfile=runner.TestRunner.java -Danypoint.username=joji4 -Danypoint.password=Canadavisa25@ -DapplicationName=apiops-bdd-sapi-jo -Dcloudhub.region=us-east-2'
         }
-<<<<<<< HEAD
+
 
       }
     }
-=======
+
         stage('Quality Gate'){
             steps {
                 script {
@@ -81,7 +81,7 @@ pipeline {
       }
     }*/
 
->>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
+
 
     stage('FunctionalTesting') {
       steps {
