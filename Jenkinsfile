@@ -103,7 +103,7 @@ pipeline {
         emailext attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', body: 'please find attached report', replyTo: 'jojisham13@gmail.com', subject: 'Reports', to: 'jojisham13@gmail.com'
       }
     }
-
+  }
  /*stage('Kill container') {
       steps {
         script {
