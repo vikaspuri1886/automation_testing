@@ -60,11 +60,11 @@ pipeline {
                         }
                     }
                 }
-            }
+            }*/
      stage('Build image') {
       steps {
         script {
-          dockerImage= docker.build("ravisunny27/apiops-anypoint-bdd-sapi")
+          dockerImage= docker.build("njc/apiops-anypoint-bdd-sapi")
         }
 
         echo 'image built'
@@ -74,12 +74,12 @@ pipeline {
     stage('Run container') {
       steps {
         script {
-          bat 'docker run -itd -p 8081:8081 --name apiops-anypoint-bdd-sapi  ravisunny27/apiops-anypoint-bdd-sapi'
+          bat 'docker run -itd -p 8081:8081 --name apiops-anypoint-bdd-sapi  njc/apiops-anypoint-bdd-sapi'
         }
 
         echo 'container running'
       }
-    }*/
+    }
 
 
 
@@ -113,22 +113,21 @@ pipeline {
         emailext(subject: 'Testing Reports for $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', body: 'Please find the functional testing reports. In order to check the logs also, please go to url: $BUILD_URL'+readFile("cucumber-API-Framework/src/main/resources/emailTemplate.html"), attachmentsPattern: 'cucumber-API-Framework/target/cucumber-reports/report.html', from: "${readProps['email.from']}", mimeType: "${readProps['email.mimeType']}", to: "${readProps['email.to']}")
       }
     }
-  }
- /*stage('Kill container') {
+  
+ stage('Kill container') {
       steps {
         script {
           bat 'docker rm -f apiops-anypoint-bdd-sapi'
         }
 
-<<<<<<< HEAD
-=======
+
         echo 'container Killed'
       }
     }
 
->>>>>>> 0250f80c36e5a0a6ece5e85b37434cca58ee96a7
+
+  
   }
-  }*/
   tools {
     maven 'Maven'
   }
