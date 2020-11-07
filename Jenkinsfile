@@ -74,7 +74,7 @@ pipeline {
     stage('Run container') {
       steps {
         script {
-          bat 'docker run -itd -p 8081:8081 --name apiops-anypoint-bdd-sapi  njc/apiops-anypoint-bdd-sapi'
+          bat 'docker run -itd -p 192.168.1.64:8081:8081 --name apiops-anypoint-bdd-sapi  njc/apiops-anypoint-bdd-sapi'
         }
 
         echo 'container running'
