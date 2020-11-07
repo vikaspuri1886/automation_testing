@@ -165,3 +165,14 @@ like for applicationName -DapplicationName=apiops-bdd-sapi
  5. You can find the pipeline which will run build, deploy, functional test cases, and email in url:
 [https://github.com/njclabs/apiops-anypoint-bdd-sapi/blob/master/Jenkinsfile] 
 
+
+**Adds on:**
+If you make additional changes in the project and want to make artifact then please follow the steps mentioned in the below URL :
+[https://njclabs.atlassian.net/wiki/spaces/APIX/pages/898269187/08-Creating+Archetypes]
+
+
+
+
+
+
+
